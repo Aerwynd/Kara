@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Animator KaraAnimator;
     public CharacterController controller;
 
     public float speed = 12f;
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        KaraAnimator = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
@@ -38,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        KaraAnimator.SetFloat("Walk", x);
-        KaraAnimator.SetFloat("Walk", z);
 
         Vector3 move = transform.right * x + transform.forward * z;
 

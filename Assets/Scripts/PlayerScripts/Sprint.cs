@@ -24,6 +24,5 @@ public class Sprint : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
             PlayerMovement.speed -= speedBoost;
 
-
     }
 }
