@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -11,13 +11,13 @@ public class PlayerMove : MonoBehaviour
     public float camMinimumY         = -60f;
     public float camMaximumY         = 75f;
     public float rotationSmoothSpeed = 10f;
+    
+    public float walkSpeed = 6f;
+    public float runSpeed  = 12f;
+    public float maxSpeed  = 25f;
+    public float jumpPower = 1f;
 
-    public float walkSpeed = 9f;
-    public float runSpeed  = 14f;
-    public float maxSpeed  = 20f;
-    public float jumpPower = 30f;
-
-    public float extraGravity = 45;
+    //public float extraGravity = 45;
 
     float   bodyRotationX;
     float   camRotationY;
@@ -25,14 +25,15 @@ public class PlayerMove : MonoBehaviour
     Vector3 directionIntentY;
     float   speed;
    
+
+
     public bool isGrounded = true;
     
     void Update()
     {
         LookRotation();
         Movement();
-        ExtraGravity();
-        
+        //ExtraGravity();
     }
 
     void LookRotation()
@@ -61,7 +62,6 @@ public class PlayerMove : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, bodyTargetRotation, Time.deltaTime * rotationSmoothSpeed);
 
         camera.localRotation = Quaternion.Lerp(camera.localRotation, camTargetRotation, Time.deltaTime * rotationSmoothSpeed);
-      
     }
 
     void Movement()
@@ -93,11 +93,10 @@ public class PlayerMove : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space) && isGrounded == true )
         {
-            rb.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, jumpPower , 0), ForceMode.Impulse);
             isGrounded = false;
+            
         }
-
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -108,9 +107,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void ExtraGravity()
+    /*void ExtraGravity()
     {
         rb.AddForce(Vector3.down * extraGravity);
     }
-
+    */
+    
+    
 }
