@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public new Transform camera;
     public Rigidbody rb;
-    public Animator animator;
+    
 
     public float camRotationSpeed    = 5f;
     public float camMinimumY         = -60f;
@@ -96,36 +96,6 @@ public class PlayerMove : MonoBehaviour
             isGrounded = false;
             
         }
-
-        // Animations
-        
-        //Déplacement normal
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            animator.SetBool("IsRunning", true);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            animator.SetBool("IsRunning", false);
-        }
-        
-        //Sprint
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            animator.SetBool("IsSprinting", true);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            animator.SetBool("IsSprinting", false);
-        }
-
-        //Saut 
-
-        if (Input.GetKey(KeyCode.Space) && isGrounded == true)
-        {
-            animator.SetBool("Jump", true);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -133,7 +103,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            animator.SetBool("Jump", false);
+            
         }
     }
     
