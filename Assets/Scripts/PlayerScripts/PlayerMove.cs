@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public new Transform camera;
     public Rigidbody rb;
+    public Animator KaraAnimator;
     
 
     public float camRotationSpeed    = 5f;
@@ -96,14 +97,54 @@ public class PlayerMove : MonoBehaviour
             isGrounded = false;
             
         }
+
+        //Animations
+
+        //Déplacements
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            KaraAnimator.SetBool("IsRunning", true);
+        }
+        
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            KaraAnimator.SetBool("IsRunning", false);
+        }
+
+        //Jump pendant la course
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            KaraAnimator.SetBool("IsJumping", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            KaraAnimator.SetBool("IsJumping", false);
+        }
+
+        //Jump à l'arrêt 
+
+        if (Input.GetKeyDown(KeyCode.Space))
+
+        {
+            KaraAnimator.SetBool("IdleJump", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            KaraAnimator.SetBool("IdleJump", false);
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == ("Ground"))
         {
             isGrounded = true;
-            
+            KaraAnimator.SetBool("IsJumping", false);
+            KaraAnimator.SetBool("IdleJump", false);
         }
     }
     
